@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html player</title>
+</head>
+
+<body>
+
+    <p>
+        <a href="https://pixabay.com" target="_blank">pixabay.com</a>
+
+    <ul>
+        <li><a href="velvet-sky-lofi-ambient-231924.mp3">Velvet Sky (LoFi Ambient) by Top-Flow [pixabay.com license]</a>
+        </li>
+        <li><a href="ethereal-horizons-227475.mp3">Ethereal Horizons by Top-Flow [pixabay.com license]</a></li>
+    </ul>
+    </p>
+
+    <style>
+        body {
+            --fg: black;
+            --bg: lightgrey;
+        }
+
+        * {
+            background-color: var(--bg);
+            color: var(--fg);
+        }
+
+        li {
+            margin: 5px;
+        }
+    </style>
+
+    <div id="player_feature">
+        <audio controls id="player"></audio>
+        <input type="checkbox" id="player_intercept" checked>
+        <div id="playing"></div>
+
+        <script>
+            // filter with trick :
+            // any of the extensions with Array.prototype.some()
+            function anyArgumentsSome(itemToFilter, functionToApply, argumentsIterable) {
+                return argumentsIterable.some(
+                    argument => functionToApply(itemToFilter, argument));
+            }
+            // filter by file extensions
+            const linksFilterCriterion = itemToFilter => anyArgumentsSome(
+                itemToFilter,
+                (link, fileExtension) => link.href.endsWith("." + fileExtension),
+                ["mp3", "mp4", "3gp", "ogg", "opus"]
+            );
+
+            document.addEventListener("DOMContentLoaded", () => {
+                var links = document.querySelectorAll("a[href]")
+                links = Array.from(links).filter(linksFilterCriterion)
+                for (var link_index in links) {
+                    link_index = parseInt(link_index)
+                    var link = links[link_index]
+                    link.next_link = links[link_index + 1]
+                    link.onclick = event => { play(event.target); return !player_intercept.checked }
+                }
+                if (links.length >= 1) {
+                    player_feature.style.display = "block"
+                    play(links[0], true) //player.stop()
+                }
+            })
+            function play(link, stop = false) {
+                if (typeof link == "undefined") return
+                if (typeof current_link != "undefined")
+                    current_link.classList.remove("current_link")
+                current_link = link
+                current_link.classList.add("current_link")
+                playing.innerText = link.innerText
+                player.src = link.href
+                if (!stop) player.play()
+            }
+            player.onended = event => play(current_link.next_link)
+        </script>
+        <style>
+            #player_feature {
+                display: none;
+                position: sticky;
+                top: 5px;
+                background: var(--bg);
+                border: 2px solid var(--fg);
+                box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+            }
+
+            .current_link {
+                border: 3px solid var(--fg);
+            }
+        </style>
+    </div>
+
+</body>
+
+</html>
