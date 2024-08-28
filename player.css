@@ -1,0 +1,12 @@
+#player_feature {
+    display: none;
+    position: sticky;
+    top: 5px;
+    background: var(--bg);
+    border: 2px solid var(--fg);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.current_link {
+    border: 3px solid var(--fg);
+}
