@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     for (var link_index in links) {
         link_index = parseInt(link_index)
         var link = links[link_index]
+
+        link.classList.add("playable_link")
+
         link.next_link = links[link_index + 1]
         link.onclick = event => { play(event.target); return !player_intercept.checked }
     }

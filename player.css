@@ -10,3 +10,7 @@
 .current_link {
     border: 3px solid var(--fg);
 }
+
+.playable_link:before {
+    content: ' ♫ ';
+}
