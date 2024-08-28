@@ -8,7 +8,7 @@ function anyArgumentsSome(itemToFilter, functionToApply, argumentsIterable) {
 const linksFilterCriterion = itemToFilter => anyArgumentsSome(
     itemToFilter,
     (link, fileExtension) => link.href.endsWith("." + fileExtension),
-    ["mp3", "mp4", "3gp", "ogg", "opus"]
+    ["mp3", "mp4", "webm", "3gp", "ogg", "opus"]
 );
 
 document.addEventListener("DOMContentLoaded", () => {
