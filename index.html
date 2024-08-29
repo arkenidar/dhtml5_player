@@ -37,15 +37,20 @@
 
     <div id="player_feature">
         <audio controls id="player"></audio>
-        <input type="checkbox" id="player_intercept" checked>
-
-        <select id="after">
-            <option value="next">next</option>
-            <option value="repeat">repeat</option>
-            <option value="stop">stop</option>
-        </select>
-
         <div id="playing"></div>
+
+        <div>
+            <span>
+                after?
+                <select id="after">
+                    <option value="next">next</option>
+                    <option value="repeat">repeat</option>
+                    <option value="stop">stop</option>
+                </select>
+            </span>
+
+            <span> intercept into this? <input type="checkbox" id="player_intercept" checked> </span>
+        </div>
 
         <script src="player.js"></script>
         <link rel="stylesheet" href="player.css">
