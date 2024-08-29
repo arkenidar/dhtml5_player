@@ -38,10 +38,9 @@ function play(link, stop = false) {
     player.src = link.href
     if (!stop) player.play()
 }
-player.onended = event => {
-    if (after.value == "stop") return
-    else if (after.value == "next")
-        play(current_link.next_link)
-    else if (after.value == "repeat")
-        play(current_link)
-}
+player.onended =
+    event =>
+        play({
+            repeat: current_link,
+            next: current_link.next_link,
+        }[after.value])
