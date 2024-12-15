@@ -14,6 +14,7 @@ const linksFilterCriterion = itemToFilter => anyArgumentsSome(
 document.addEventListener("DOMContentLoaded", () => {
     var links = document.querySelectorAll("a[href]")
     links = Array.from(links).filter(linksFilterCriterion)
+    first_link = links[0]
     for (var link_index in links) {
         link_index = parseInt(link_index)
         var link = links[link_index]
@@ -53,4 +54,5 @@ player.onended =
         play({
             repeat: current_link,
             next: current_link.next_link,
+            playlist: current_link.next_link || first_link,
         }[after.value])
