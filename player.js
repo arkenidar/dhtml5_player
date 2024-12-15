@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         link.classList.add("playable_link")
 
-        //link.prepend(document.createTextNode(link_index + 1 + ". "))
+        link.prepend(document.createTextNode(" " + (link_index + 1) + ". "))
 
         // if ends with mp4 or webm
         if (link.href.endsWith(".mp4") || link.href.endsWith(".webm")) {
