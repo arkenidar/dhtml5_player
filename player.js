@@ -20,6 +20,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         link.classList.add("playable_link")
 
+        //link.prepend(document.createTextNode(link_index + 1 + ". "))
+
+        // if ends with mp4 or webm
+        if (link.href.endsWith(".mp4") || link.href.endsWith(".webm")) {
+            const button = document.createElement("button")
+            button.innerText = "video"
+            button.onclick = event => { location.assign(event.target.parentElement.href); return false }
+            link.prepend(button)
+        }
+
         link.next_link = links[link_index + 1]
         link.onclick = event => { play(event.target); return !player_intercept.checked }
     }
