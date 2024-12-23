@@ -72,6 +72,11 @@ function play(link, player_play = true) {
     current_link.classList.add("current_link")
     playing.innerText = link.innerText
     player.src = link.href
+    // custom link in location.hash
+    var json_data = { "keyword": link.href }
+    var URI = '#' + 'JSON:' + JSON.stringify(json_data)
+    link_to_current_playable.href = encodeURI(URI)
+    // play media in media player
     if (player_play) player.play()
 }
 player.onended =
