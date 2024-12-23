@@ -43,18 +43,26 @@
         <audio controls id="player"></audio>
         <div id="playing"></div>
 
+        <hr>
         <div>
-            <span>
-                after?
-                <select id="after">
-                    <option value="next">next</option>
-                    <option value="repeat">repeat</option>
-                    <option value="stop">stop</option>
-                    <option value="playlist">playlist</option>
-                </select>
-            </span>
-
-            <span> intercept into this? <input type="checkbox" id="player_intercept" checked> </span>
+            <div><a id="link_to_current_playable" href="#" target="_blank">
+                    Link to the current playable media content . </a></div>
+            <div><label style="user-select: none;">
+                    Do you want to intercept into this media-contents player ?
+                    <input type="checkbox" id="player_intercept" checked>
+                </label></div>
+            <hr>
+            <div>
+                <span>
+                    After this playable media do .
+                    <select id="after">
+                        <option value="next"> Play *next* media content , after . </option>
+                        <option value="repeat"> *Repeat* the current media content . </option>
+                        <option value="stop"> *Stop* after the end of the current media content . </option>
+                        <option value="playlist"> Repeat this *playlist* of media contents . </option>
+                    </select>
+                </span>
+            </div>
         </div>
 
         <script src="player.js"></script>
