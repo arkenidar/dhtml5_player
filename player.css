@@ -14,3 +14,11 @@
 .playable_link:before {
     content: ' ♫ ';
 }
+
+#player_feature select {
+    border: 1px solid var(--fg);
+}
+
+#player_feature {
+    padding: 5px;
+}
