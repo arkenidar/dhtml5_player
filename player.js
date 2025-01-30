@@ -53,6 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (typeof hash_json.keyword != "undefined") {
                         first_link_override = links.filter(link => link.href.includes(hash_json.keyword))[0]
                     }
+                    // if JSON string has after property
+                    if (typeof hash_json.after != "undefined") {
+                        after.value = hash_json.after
+                    }
                 } catch (error) {
                     console.error(hash, error)
                 }
@@ -73,7 +77,7 @@ function play(link, player_play = true) {
     playing.innerText = link.innerText
     player.src = link.href
     // custom link in location.hash
-    var json_data = { "keyword": link.href }
+    var json_data = { keyword: link.href, after: after.value }
     var URI = '#' + 'JSON:' + JSON.stringify(json_data)
     link_to_current_playable.href = encodeURI(URI)
     // play media in media player
