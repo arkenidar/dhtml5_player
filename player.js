@@ -68,6 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
         play(first_link, false)
     }
 })
+function json_link(){
+    // custom link in location.hash
+    var json_data = { keyword: current_link.href, after: after.value }
+    var URI = '#' + 'JSON:' + JSON.stringify(json_data)
+    link_to_current_playable.href = encodeURI(URI)
+}
 function play(link, player_play = true) {
     if (typeof link == "undefined") return
     if (typeof current_link != "undefined")
@@ -76,10 +82,8 @@ function play(link, player_play = true) {
     current_link.classList.add("current_link")
     playing.innerText = link.innerText
     player.src = link.href
-    // custom link in location.hash
-    var json_data = { keyword: link.href, after: after.value }
-    var URI = '#' + 'JSON:' + JSON.stringify(json_data)
-    link_to_current_playable.href = encodeURI(URI)
+    // JSON link with data
+    json_link()
     // play media in media player
     if (player_play) player.play()
 }
