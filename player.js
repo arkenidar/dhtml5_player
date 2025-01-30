@@ -30,6 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
             link.prepend(button)
         }
 
+        // download link
+        const download_link = document.createElement("a")
+        download_link.download = ""
+        download_link.innerText = "⬇"
+        download_link.href = link.href
+        link.after(download_link)
+
         link.next_link = links[link_index + 1]
         link.onclick = event => { play(event.target); return !player_intercept.checked }
     }
@@ -68,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         play(first_link, false)
     }
 })
-function json_link(){
+function json_link() {
     // custom link in location.hash
     var json_data = { keyword: current_link.href, after: after.value }
     var URI = '#' + 'JSON:' + JSON.stringify(json_data)
