@@ -42,7 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (links.length >= 1) {
         player_feature.style.display = "block"
-        first_link = links[0]
+        first_link_in_playlist = links[0]
+        var first_link_to_play = first_link_in_playlist
         // custom first link in location.hash
         if (location.hash.startsWith("#")) {
             var hash = location.hash.slice(1)
@@ -69,10 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             if (typeof first_link_override != "undefined") {
-                first_link = first_link_override
+                first_link_to_play = first_link_override
             }
         }
-        play(first_link, false)
+        play(first_link_to_play, false)
     }
 })
 function json_link() {
@@ -99,5 +100,5 @@ player.onended =
         play({
             repeat: current_link,
             next: current_link.next_link,
-            playlist: current_link.next_link || first_link,
+            playlist: current_link.next_link || first_link_in_playlist,
         }[after.value])
