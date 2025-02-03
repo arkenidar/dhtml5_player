@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // download link
         const download_link = document.createElement("a")
         download_link.download = ""
-        download_link.innerText = "⬇"
+        download_link.innerText = "⬇copy"
         download_link.href = link.href
         link.after(download_link)
 
