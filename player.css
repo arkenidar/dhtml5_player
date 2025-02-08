@@ -22,3 +22,7 @@
 #player_feature {
     padding: 5px;
 }
+
+body.download_links_hide a.download_link {
+    display: none;
+}
