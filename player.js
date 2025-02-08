@@ -125,3 +125,11 @@ if (typeof player_download_links_shown != "undefined") {
     }
     download_links_display(player_download_links_shown.checked)
 }
+
+function ask_for_showing_download_links() {
+    const shown = confirm("Show download links?")
+    if (typeof player_download_links_shown != "undefined") {
+        player_download_links_shown.checked = shown
+    }
+    download_links_display(shown)
+}
