@@ -104,27 +104,47 @@ player.onended =
             playlist: current_link.next_link || first_link_in_playlist,
         }[after.value])
 
-// download links display logic
+// download links display css class and localStorage
 function download_links_display(shown) {
     // save download links display state
     localStorage.download_links_display = shown
-    // add or remove class to hide download links
+    // add or remove class to hide download links ( CSS class )
     const verb = shown ? "remove" : "add"
     document.body.classList[verb]("download_links_hide")
 }
 
+// when page loads
+
+// if download links checkbox exists
 if (typeof player_download_links_shown != "undefined") {
-    // download links checkbox oninput
+    // download links checkbox oninput , when changed
     player_download_links_shown.oninput = function () {
         const shown = this.checked
         download_links_display(shown)
     }
-    // download links checkbox onload
+    // download links checkbox onload , when page loads
+    let shown = player_download_links_shown.checked
+    // if download links display state is saved
     if (localStorage.getItem("download_links_display") != null) {
-        player_download_links_shown.checked = localStorage.download_links_display == "true"
+        // get saved download links display state
+        shown = localStorage.download_links_display == "true"
     }
-    download_links_display(player_download_links_shown.checked)
+    // set download links display state
+    player_download_links_shown.checked = shown
+    // download links display css class and localStorage
+    download_links_display(shown)
 }
+
+// download links display onload
+// default download links display state
+let shown = true
+// if download links display state is saved
+if (localStorage.getItem("download_links_display") != null) {
+    // get saved download links display state
+    shown = localStorage.download_links_display == "true"
+}
+// download links display css class and localStorage
+download_links_display(shown)
 
 function ask_for_showing_download_links() {
     const shown = confirm("Show download links?")
