@@ -113,13 +113,15 @@ function download_links_display(shown) {
     document.body.classList[verb]("download_links_hide")
 }
 
-// download links checkbox oninput
-player_download_links_shown.oninput = function () {
-    const shown = this.checked
-    download_links_display(shown)
+if (typeof player_download_links_shown != "undefined") {
+    // download links checkbox oninput
+    player_download_links_shown.oninput = function () {
+        const shown = this.checked
+        download_links_display(shown)
+    }
+    // download links checkbox onload
+    if (localStorage.getItem("download_links_display") != null) {
+        player_download_links_shown.checked = localStorage.download_links_display == "true"
+    }
+    download_links_display(player_download_links_shown.checked)
 }
-// download links checkbox onload
-if (localStorage.getItem("download_links_display") != null) {
-    player_download_links_shown.checked = localStorage.download_links_display == "true"
-}
-download_links_display(player_download_links_shown.checked)
