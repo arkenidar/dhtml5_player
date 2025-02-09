@@ -20,7 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         link.classList.add("playable_link")
 
-        link.prepend(document.createTextNode(" " + (link_index + 1) + ". "))
+        // feature : link number
+        const link_number = (link_index + 1).toString().padStart(3, " ") + "." // 3 digits
+        const link_number_span = document.createElement("span")
+        // replace space with non-breaking space
+        link_number_span.innerHTML = link_number.replaceAll(" ", "&nbsp;")
+        link_number_span.style.fontFamily = "monospace" // monospace font
+        // prepend link number to link
+        link.prepend(link_number_span)
 
         // if ends with mp4 or webm
         if (link.href.endsWith(".mp4") || link.href.endsWith(".webm")) {
