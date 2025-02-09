@@ -26,3 +26,7 @@
 body.download_links_hide a.download_link {
     display: none;
 }
+
+.no_select {
+    user-select: none;
+}
