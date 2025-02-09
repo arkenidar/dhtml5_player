@@ -7,11 +7,20 @@
     box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-.current_link {
-    border: 3px solid var(--fg);
+a.playable_link {
+    margin: -2mm;
+    border: 2mm solid transparent;
 }
 
-.playable_link:before {
+a.current_link {
+    border-color: var(--fg);
+}
+
+a.download_link {
+    margin-left: 2mm;
+}
+
+a.playable_link:before {
     content: ' ♫ ';
 }
 
