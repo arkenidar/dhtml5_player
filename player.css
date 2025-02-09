@@ -20,9 +20,11 @@ a.download_link {
     margin-left: 2mm;
 }
 
+/*
 a.playable_link:before {
     content: ' ♫ ';
 }
+*/
 
 #player_feature select {
     border: 1px solid var(--fg);
