@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // feature : link number
         const link_number = (link_index + 1).toString().padStart(3, " ") + "." // 3 digits
         const link_number_span = document.createElement("span")
+        link_number_span.classList.add("link_numbering")
         // replace space with non-breaking space
         link_number_span.innerHTML = link_number.replaceAll(" ", "&nbsp;")
         link_number_span.style.fontFamily = "monospace" // monospace font

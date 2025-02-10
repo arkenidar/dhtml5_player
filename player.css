@@ -37,7 +37,8 @@ a.playable_link:before {
     padding: 5px;
 }
 
-body.download_links_hide a.download_link {
+body.download_links_hide a.download_link,
+body.download_links_hide span.link_numbering {
     display: none;
 }
 
