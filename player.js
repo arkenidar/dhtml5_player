@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const file_name = link_title.slice(0, file_extension_dot_index)
             const file_extension = link_title.slice(file_extension_dot_index + 1)
             link_title = file_name
-            link_title += " (" + file_extension + ")"
+            link_title += " (" + file_extension + ")."
         }
         link.innerText = link_title
 
