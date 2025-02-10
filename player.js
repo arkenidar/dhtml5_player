@@ -20,6 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         link.classList.add("playable_link")
 
+        // feature : link title
+        var link_title = link.innerText
+        const file_extension_dot_index = link_title.lastIndexOf(".") // last dot
+        if (file_extension_dot_index >= 0) {
+            const file_name = link_title.slice(0, file_extension_dot_index)
+            const file_extension = link_title.slice(file_extension_dot_index + 1)
+            link_title = file_name
+            link_title += " (" + file_extension + ")"
+        }
+        link.innerText = link_title
+
         // feature : link number
         const link_number = (link_index + 1).toString().padStart(3, " ") + "." // 3 digits
         const link_number_span = document.createElement("span")
