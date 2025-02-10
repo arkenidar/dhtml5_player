@@ -6,9 +6,13 @@
     border: 2px solid var(--fg);
 }
 
+:root {
+    --link-border-size: 2px;
+}
+
 a.playable_link {
-    margin: -2mm;
-    border: 2mm solid transparent;
+    margin: calc(-1 * var(--link-border-size));
+    border: var(--link-border-size) solid transparent;
 }
 
 a.current_link {
@@ -16,7 +20,7 @@ a.current_link {
 }
 
 a.download_link {
-    margin-left: 2mm;
+    margin-left: var(--link-border-size);
 }
 
 /*
