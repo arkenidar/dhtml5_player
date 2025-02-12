@@ -109,7 +109,7 @@ function play(link, player_play = true) {
     current_link = link
     current_link.classList.add("current_link")
     playing.innerText = link.innerText
-    player.src = link.href
+    player.src = link.href.replaceAll(" ", "%20")
     // JSON link with data
     json_link()
     // play media in media player
