@@ -1,18 +1,9 @@
-// filter with trick :
-// any of the extensions with Array.prototype.some()
-function anyArgumentsSome(itemToFilter, functionToApply, argumentsIterable) {
-    return argumentsIterable.some(
-        argument => functionToApply(itemToFilter, argument));
-}
-// filter by file extensions
-const linksFilterCriterion = itemToFilter => anyArgumentsSome(
-    itemToFilter,
-    (link, fileExtension) => link.href.endsWith("." + fileExtension),
-    ["mp3", "mp4", "webm", "3gp", "ogg", "opus", "m4a"]
-);
-
 document.addEventListener("DOMContentLoaded", () => {
     var links = document.querySelectorAll("a[href]")
+    const linksFilterCriterion = link =>
+        ["mp3", "mp4", "webm", "3gp", "ogg", "opus", "m4a"].some(
+            file_extension => link.href.endsWith(`.${file_extension}`)
+        )
     links = Array.from(links).filter(linksFilterCriterion)
     for (var link_index in links) {
         link_index = parseInt(link_index)
