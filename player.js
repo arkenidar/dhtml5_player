@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     var links = document.querySelectorAll("a[href]")
     const linksFilterCriterion = link =>
-        ["mp3", "mp4", "webm", "3gp", "ogg", "opus", "m4a", "wav", "mid"].some(
+        ["mp3", "mp4", "webm", "3gp", "ogg", "opus", "m4a", "wav", "mid", "xm"].some(
             file_extension => link.href.endsWith(`.${file_extension}`)
         )
     links = Array.from(links).filter(linksFilterCriterion)
