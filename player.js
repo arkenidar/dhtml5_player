@@ -1,3 +1,8 @@
+
+// MIT License
+// Copyright (c) 2025 Dario Cangialosi
+// see LICENSE.txt file in the root directory of this source tree
+
 document.addEventListener("DOMContentLoaded", player_initialize)
 
 function player_initialize() {
