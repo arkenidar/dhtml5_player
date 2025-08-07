@@ -13,8 +13,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // feature : link title
         var link_title = link.innerText
+
+        // remove file extension from link title
+        // and add it in parentheses at the end of link title
+        // e.g. "song.mp3" -> "song (mp3)."
+        // e.g. "video.mp4" -> "video (mp4)."
+
+        // if link title has file extension
+        // e.g. "song.mp3" -> "song"
+        // e.g. "video.mp4" -> "video"
+        // find last dot in link title
+        // and check if it is a file extension dot
+
+        // if last dot is at position -2 or less from end
+        // and at position -7 or more from end
+        // then it is a file extension dot
+        // e.g. "song.mp3" -> last dot is at position -4 from end
+        // e.g. "video.mp4" -> last dot is at position -4 from end
+
+        // if link title has file extension
         const file_extension_dot_index = link_title.lastIndexOf(".") // last dot
-        if (file_extension_dot_index >= 0) {
+        var is_file_extension_dot = file_extension_dot_index >= 0
+        const last_dot_position = file_extension_dot_index - link_title.length // position of last dot
+        is_file_extension_dot &&= (last_dot_position <= -2 && last_dot_position >= -7) // not last character
+        // if link title has file extension
+        // remove file extension from link title
+        // and add it in parentheses at the end of link title
+        // e.g. "song.mp3" -> "song (mp3)."
+        // e.g. "video.mp4" -> "video (mp4)."
+        if (is_file_extension_dot) {
             const file_name = link_title.slice(0, file_extension_dot_index)
             const file_extension = link_title.slice(file_extension_dot_index + 1)
             link_title = file_name
