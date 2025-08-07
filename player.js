@@ -78,7 +78,9 @@ function player_initialize() {
         link.after(download_link)
 
         link.next_link = links[link_index + 1]
-        link.onclick = event => { play(event.target); return !player_intercept.checked }
+        link.onclick = player_link_click
+
+        function player_link_click(event) { play(event.target); return !player_intercept.checked }
     }
     if (links.length >= 1) {
         player_feature.style.display = "block"
