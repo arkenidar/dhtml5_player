@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", player_initialize)
+
+function player_initialize() {
     var links = document.querySelectorAll("a[href]")
     const linksFilterCriterion = link =>
         ["mp3", "mp4", "webm", "3gp", "ogg", "opus", "m4a", "wav", "mid", "xm"].some(
@@ -113,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         play(first_link_to_play, false)
     }
-})
+}
 function json_link() {
     // custom link in location.hash
     var json_data = { keyword: current_link.href, after: after.value }
