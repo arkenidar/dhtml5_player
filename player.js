@@ -129,6 +129,21 @@ function link_play(link, player_play = true) {
         console.error("No playable link found.")
         return
     }
+    // if link is A element
+    if (typeof link == "object" && link.tagName != "A") {
+        // if link is not an A element, error out
+        //console.error("Expected an A element, but got:", link)
+        //console.dir(link)
+        if (link.parentElement.tagName == "A") {
+            // if link is a child of an A element, use the parent A element
+            link = link.parentElement
+        } else {
+            // if link is not an A element, return
+            console.error("No playable link found in parent A element.")
+            console.dir(link)
+            return
+        }
+    }
     if (typeof link.href == "undefined") {
         console.error("No playable 'link.href' found.")
         console.dir(link)
