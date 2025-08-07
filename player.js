@@ -80,7 +80,7 @@ function player_initialize() {
         link.next_link = links[link_index + 1]
         link.onclick = player_link_click
 
-        function player_link_click(event) { play(event.target); return !player_intercept.checked }
+        function player_link_click(event) { link_play(event.target); return !player_intercept.checked }
     }
     if (links.length >= 1) {
         player_feature.style.display = "block"
@@ -115,7 +115,7 @@ function player_initialize() {
                 first_link_to_play = first_link_override
             }
         }
-        play(first_link_to_play, false)
+        link_play(first_link_to_play, false)
     }
 }
 function json_link() {
@@ -124,8 +124,16 @@ function json_link() {
     var URI = '#' + 'JSON:' + JSON.stringify(json_data)
     link_to_current_playable.href = encodeURI(URI)
 }
-function play(link, player_play = true) {
-    if (typeof link == "undefined") return
+function link_play(link, player_play = true) {
+    if (typeof link == "undefined") {
+        console.error("No playable link found.")
+        return
+    }
+    if (typeof link.href == "undefined") {
+        console.error("No playable 'link.href' found.")
+        console.dir(link)
+        return
+    }
     if (typeof current_link != "undefined")
         current_link.classList.remove("current_link")
     current_link = link
@@ -139,7 +147,7 @@ function play(link, player_play = true) {
 }
 player.onended =
     event =>
-        play({
+        link_play({
             repeat: current_link,
             next: current_link.next_link,
             playlist: current_link.next_link || first_link_in_playlist,
