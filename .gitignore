@@ -7,3 +7,5 @@
 *.wav
 *.mid
 *.xm
+
+!soil.mp4
