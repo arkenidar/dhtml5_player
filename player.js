@@ -7,8 +7,11 @@ document.addEventListener("DOMContentLoaded", player_initialize)
 
 function player_initialize() {
     var links = document.querySelectorAll("a[href]")
+    const video_extensions = ["mp4", "webm"]
+    const audio_extensions = ["mp3", "3gp", "ogg", "opus", "m4a", "wav", "mid", "xm"]
+    const playable_extensions = audio_extensions.concat(video_extensions)
     const linksFilterCriterion = link =>
-        ["mp3", "3gp", "ogg", "opus", "m4a", "wav", "mid", "xm"].some(
+        playable_extensions.some(
             file_extension => link.href.endsWith(`.${file_extension}`)
         )
     links = Array.from(links).filter(linksFilterCriterion)
@@ -67,7 +70,7 @@ function player_initialize() {
         link.prepend(link_number_span)
 
         // if ends with mp4 or webm
-        if (link.href.endsWith(".mp4") || link.href.endsWith(".webm")) {
+        if (video_extensions.some(file_extension => link.href.endsWith(`.${file_extension}`))) {
             const button = document.createElement("button")
             button.innerText = "video"
             button.onclick = event => { location.assign(event.target.parentElement.href); return false }
