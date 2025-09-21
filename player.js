@@ -21,6 +21,14 @@ function player_initialize() {
 
         link.classList.add("playable_link")
 
+        // audio or video link
+        if (audio_extensions.some(file_extension => link.href.endsWith(`.${file_extension}`))) {
+            link.dataset.mediaType = "audio"
+        }
+        if (video_extensions.some(file_extension => link.href.endsWith(`.${file_extension}`))) {
+            link.dataset.mediaType = "video"
+        }
+
         // feature : link title
         var link_title = link.innerText
 
@@ -162,19 +170,42 @@ function link_play(link, player_play = true) {
     current_link = link
     current_link.classList.add("current_link")
     playing.innerText = link.innerText
-    player.src = link.href.replaceAll(" ", "%20")
+
+    // show audio or video player
+    const media_type = link.dataset.mediaType
+    var player_active = null
+    if (media_type == "audio") {
+        player_video.pause()
+        player_video.style.display = "none"
+        player_audio.style.display = "block"
+        player_active = player_audio
+    } else if (media_type == "video") {
+        player_audio.pause()
+        player_audio.style.display = "none"
+        player_video.style.display = "block"
+        player_active = player_video
+    }
+
+    // set media source
+    player_active.src = link.href.replaceAll(" ", "%20")
     // JSON link with data
     json_link()
     // play media in media player
-    if (player_play) player.play()
+    if (player_play) player_active.play()
 }
-player.onended =
-    event =>
-        link_play({
-            repeat: current_link,
-            next: current_link.next_link,
-            playlist: current_link.next_link || first_link_in_playlist,
-        }[after.value])
+
+// on audio/video media end, play next link
+function on_media_end() {
+    link_play({
+        repeat: current_link,
+        next: current_link.next_link,
+        playlist: current_link.next_link || first_link_in_playlist,
+    }[after.value])
+}
+
+player_video.onended = on_media_end
+player_audio.onended = on_media_end
+
 
 // download links display css class and localStorage
 function download_links_display(shown) {
