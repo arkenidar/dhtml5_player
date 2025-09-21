@@ -1,7 +1,7 @@
 #player_feature {
     display: none;
-    position: sticky;
-    top: 5px;
+    /* position: sticky;
+    top: 5px; */
     background: var(--bg);
     border: 2px solid var(--fg);
 }
