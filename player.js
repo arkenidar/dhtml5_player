@@ -131,9 +131,52 @@ function player_initialize() {
                 first_link_to_play = first_link_override
             }
         }
-        link_play(first_link_to_play, false)
+
+        const autoplay_on_page_load = false
+        if (autoplay_on_page_load)
+            link_play(first_link_to_play, false)
     }
-}
+
+    // when page loads
+
+    player_video.onended = on_media_end
+    player_audio.onended = on_media_end
+
+    // when page loads
+
+    // if download links checkbox exists
+    if (typeof player_download_links_shown != "undefined") {
+        // download links checkbox oninput , when changed
+        player_download_links_shown.oninput = function () {
+            const shown = this.checked
+            download_links_display(shown)
+        }
+        // download links checkbox onload , when page loads
+        let shown = player_download_links_shown.checked
+        // if download links display state is saved
+        if (localStorage.getItem("download_links_display") != null) {
+            // get saved download links display state
+            shown = localStorage.download_links_display == "true"
+        }
+        // set download links display state
+        player_download_links_shown.checked = shown
+        // download links display css class and localStorage
+        download_links_display(shown)
+    }
+
+    // download links display onload
+    // default download links display state
+    let shown = true
+    // if download links display state is saved
+    if (localStorage.getItem("download_links_display") != null) {
+        // get saved download links display state
+        shown = localStorage.download_links_display == "true"
+    }
+    // download links display css class and localStorage
+    download_links_display(shown)
+
+} // player_initialize
+
 function json_link() {
     // custom link in location.hash
     var json_data = { keyword: current_link.href, after: after.value }
@@ -203,10 +246,6 @@ function on_media_end() {
     }[after.value])
 }
 
-player_video.onended = on_media_end
-player_audio.onended = on_media_end
-
-
 // download links display css class and localStorage
 function download_links_display(shown) {
     // save download links display state
@@ -215,39 +254,6 @@ function download_links_display(shown) {
     const verb = shown ? "remove" : "add"
     document.body.classList[verb]("download_links_hide")
 }
-
-// when page loads
-
-// if download links checkbox exists
-if (typeof player_download_links_shown != "undefined") {
-    // download links checkbox oninput , when changed
-    player_download_links_shown.oninput = function () {
-        const shown = this.checked
-        download_links_display(shown)
-    }
-    // download links checkbox onload , when page loads
-    let shown = player_download_links_shown.checked
-    // if download links display state is saved
-    if (localStorage.getItem("download_links_display") != null) {
-        // get saved download links display state
-        shown = localStorage.download_links_display == "true"
-    }
-    // set download links display state
-    player_download_links_shown.checked = shown
-    // download links display css class and localStorage
-    download_links_display(shown)
-}
-
-// download links display onload
-// default download links display state
-let shown = true
-// if download links display state is saved
-if (localStorage.getItem("download_links_display") != null) {
-    // get saved download links display state
-    shown = localStorage.download_links_display == "true"
-}
-// download links display css class and localStorage
-download_links_display(shown)
 
 function ask_for_showing_download_links() {
     const shown = confirm("Show download links?")
