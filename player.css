@@ -1,3 +1,8 @@
+#player_audio,
+#player_video {
+    display: none;
+}
+
 #player_feature {
     display: none;
     /* position: sticky;
