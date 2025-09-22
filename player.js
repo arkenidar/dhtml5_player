@@ -89,7 +89,7 @@ function player_initialize() {
         const download_link = document.createElement("a")
         download_link.download = ""
         download_link.classList.add("download_link")
-        download_link.innerText = "⬇copy"
+        download_link.innerText = "⬇ copy"
         download_link.href = link.href
         link.after(download_link)
 
