@@ -99,7 +99,7 @@ function player_initialize() {
         function player_link_click(event) {
             const current_link_or_null = typeof current_link != "undefined" ? current_link : null;
             // if current link is the same as clicked link
-            const same_link_clicked = current_link_or_null == event.target;
+            const same_link_clicked = this == current_link_or_null;
             const something_playing = !player_audio.paused || !player_video.paused
             if (same_link_clicked && something_playing) {
                 // if same link clicked and media is playing, pause media
