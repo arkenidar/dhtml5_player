@@ -96,7 +96,19 @@ function player_initialize() {
         link.next_link = links[link_index + 1]
         link.onclick = player_link_click
 
-        function player_link_click(event) { link_play(event.target); return !player_intercept.checked }
+        function player_link_click(event) {
+            const current_link_or_null = typeof current_link != "undefined" ? current_link : null;
+            // if current link is the same as clicked link
+            const same_link_clicked = current_link_or_null == event.target;
+            const something_playing = !player_audio.paused || !player_video.paused
+            if (same_link_clicked && something_playing) {
+                // if same link clicked and media is playing, pause media
+                player_audio.pause();
+                player_video.pause();
+            } else
+                link_play(event.target);
+            return !player_intercept.checked;
+        }
     }
     if (links.length >= 1) {
         player_feature.style.display = "block"
@@ -210,27 +222,56 @@ function link_play(link, player_play = true) {
     }
     if (typeof current_link != "undefined")
         current_link.classList.remove("current_link")
+
+    // is same link ?
+    // if current_link is undefined, use null
+    const current_link_or_null = typeof current_link != "undefined" ? current_link : null
+    const same_link = link == current_link_or_null
+
+    // same link const used to toggle play/pause on same link click .
+
+    // if same link clicked and media is playing, pause media
+    // else play media .
+
+    // set current link to link
     current_link = link
+    // add class to current link
     current_link.classList.add("current_link")
+    // set now playing text to link text
     playing.innerText = link.innerText
 
     // show audio or video player
     const media_type = link.dataset.mediaType
+    // if media type is audio or video
     var player_active = null
     if (media_type == "audio") {
+        // pause video player
         player_video.pause()
+        // show audio player
         player_video.style.display = "none"
         player_audio.style.display = "block"
+        // set active player to audio player
         player_active = player_audio
     } else if (media_type == "video") {
+        // pause audio player
         player_audio.pause()
+        // show video player
         player_audio.style.display = "none"
         player_video.style.display = "block"
+        // set active player to video player
         player_active = player_video
     }
 
-    // set media source
-    player_active.src = link.href.replaceAll(" ", "%20")
+    // link href with spaces replaced by %20
+    const link_href = link.href.replaceAll(" ", "%20")
+    // is same media ?
+    const same_media = player_active.src == link_href
+
+    // if not same link or not same media
+    if (!same_link || !same_media) {
+        // set media source to link href
+        player_active.src = link_href
+    }
     // JSON link with data
     json_link()
     // play media in media player
