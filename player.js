@@ -239,6 +239,8 @@ function link_play(link, player_play = true) {
     current_link.classList.add("current_link")
     // set now playing text to link text
     playing.innerText = link.innerText
+    // set a "now-playing" document-title to link-title
+    document.title = link.innerText
 
     // show audio or video player
     const media_type = link.dataset.mediaType
