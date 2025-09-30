@@ -109,10 +109,13 @@ function player_initialize() {
                 link_play(event.target);
             return !player_intercept.checked;
         }
-    }
+    } // for link_index in links
+
+    // initialize first link in playlist
+    var first_link_overridden = false
     if (links.length >= 1) {
         player_feature.style.display = "block"
-        first_link_in_playlist = links[0]
+        window.first_link_in_playlist = links[0]
         var first_link_to_play = first_link_in_playlist
         // custom first link in location.hash
         if (location.hash.startsWith("#")) {
@@ -141,12 +144,15 @@ function player_initialize() {
             }
             if (typeof first_link_override != "undefined") {
                 first_link_to_play = first_link_override
+                first_link_overridden = true
             }
         }
 
         const autoplay_on_page_load = false
-        if (autoplay_on_page_load)
+        if (autoplay_on_page_load || first_link_overridden) {
+            // autoplay first link
             link_play(first_link_to_play, false)
+        }
     }
 
     // when page loads
