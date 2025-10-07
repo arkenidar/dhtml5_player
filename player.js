@@ -63,9 +63,12 @@ function player_initialize() {
             const file_name = link_title.slice(0, file_extension_dot_index)
             const file_extension = link_title.slice(file_extension_dot_index + 1)
             link_title = file_name
+            // don't translate file extension
+            link_title += "<span class='notranslate'>"
             link_title += " (" + file_extension + ")."
+            link_title += "</span>"
         }
-        link.innerText = link_title
+        link.innerHTML = link_title
 
         // feature : link number
         const link_number = (link_index + 1).toString().padStart(3, " ") + "." // 3 digits
