@@ -84,7 +84,7 @@ function player_initialize() {
         if (video_extensions.some(file_extension => link.href.endsWith(`.${file_extension}`))) {
             const button = document.createElement("button")
             button.innerText = "video"
-            button.onclick = event => { location.assign(event.target.parentElement.href); return false }
+            button.onclick = event => { location.assign(event.currentTarget.parentElement.href); return false }
             link.prepend(button)
         }
 
@@ -109,7 +109,7 @@ function player_initialize() {
                 player_audio.pause();
                 player_video.pause();
             } else
-                link_play(event.target);
+                link_play(event.currentTarget);
             return !player_intercept.checked;
         }
     } // for link_index in links
