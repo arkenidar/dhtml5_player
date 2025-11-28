@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", player_initialize)
 function player_initialize() {
     var links = document.querySelectorAll("a[href]")
     const video_extensions = ["mp4", "webm"]
-    const audio_extensions = ["mp3", "3gp", "ogg", "opus", "m4a", "wav", "mid", "xm"]
+    const audio_extensions = ["mp3", "3gp", "ogg", "opus", "m4a", "flac", "wav", "mid", "xm"]
     const playable_extensions = audio_extensions.concat(video_extensions)
     const linksFilterCriterion = link =>
         playable_extensions.some(
